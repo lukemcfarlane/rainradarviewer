@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="RainRadarViewer">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+        <title>Rain Radar Viewer</title>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+        <script src="app/application.js"></script>
+        <script src="app/controllers/mainCtrl.js"></script>
+    </head>
+    <body ng-controller="MainCtrl">
+        <div class="container">
+            <div class="page-header text-center">
+              <h1>Rain Radar Viewer</h1>
+
+              <div class="radar-img-container" ng-repeat="d in data">
+                  <img class="img-rounded" src="{{ d.url }}"/>
+                  <br/>
+                  <br/>
+              </div>
+
+            </div>
+        </div>
+    </body>
+</html>

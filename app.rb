@@ -4,6 +4,10 @@ require 'sinatra'
 require 'json'
 require 'rest_client'
 
+get '/' do
+    send_file 'public/index.html'
+end
+
 get '/radar/images' do
     response = RestClient.get 'http://metservice.com/publicData/rainRadarChristchurch_2h_7min_300K'
 
