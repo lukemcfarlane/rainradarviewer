@@ -25,7 +25,10 @@ app.controller('MainCtrl', function($scope, $http) {
 	var loadImages = function(imagesArr) {
 		angular.forEach(imagesArr, function(img) {
 			img.active = false;
-			img.time = moment.unix(img.datetime).format('hh:mm');
+			img.time = moment
+				.unix(img.datetime)
+				.tz('Pacific/Auckland')
+				.format('hh:mm a');
 		});
 		$scope.images = imagesArr;
 	};

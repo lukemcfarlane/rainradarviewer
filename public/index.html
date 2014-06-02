@@ -10,6 +10,7 @@
         <script src="app/js/ui-bootstrap-tpls-0.1.0.js"></script>
         <script src="https://cdn.jsdelivr.net/underscorejs/1.5.2/underscore-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+        <script src="app/js/moment-timezone.min.js"></script>
         <script src="app/application.js"></script>
         <script src="app/controllers/mainCtrl.js"></script>
     </head>
@@ -27,7 +28,7 @@
                     <slide ng-repeat="img in images" active="img.active">
                         <img ng-src="{{ img.url}}" style="margin:auto;">
                         <div class="carousel-caption">
-                            <h4></h4>
+                            <h4>Test</h4>
                             <p>{{ img.time }}</p>
                         </div>
                     </slide>
