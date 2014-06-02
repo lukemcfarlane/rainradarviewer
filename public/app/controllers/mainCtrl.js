@@ -12,13 +12,21 @@ app.controller('MainCtrl', function($scope, $http) {
 		url: 'radar/images'
 	}).
 	success(function(data, status, headers, config) {
-		$scope.images = data;
+		loadImages(data);
 	}).
 	error(function(data, status, headers, config) {
 		$scope.alerts.push('Something went wrong while trying to retrieve rain radar images.');
 	});
 
-    $scope.closeAlert = function(index) {
+	$scope.closeAlert = function(index) {
 		$scope.alerts.splice(index, 1);
+	};
+
+	var loadImages = function(imagesArr) {
+		angular.forEach(imagesArr, function(img) {
+			img.active = false;
+			img.time = moment.unix(img.datetime).format('hh:mm');
+		});
+		$scope.images = imagesArr;
 	};
 });

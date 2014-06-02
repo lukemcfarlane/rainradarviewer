@@ -4,4 +4,4 @@
  * @author  https://github.com/lukemcfarlane
  * @date    June 2014
  */
-var app = angular.module('RainRadarViewer', function() {});
+var app = angular.module('RainRadarViewer', ['ui.bootstrap']);

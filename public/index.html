@@ -6,7 +6,8 @@
         <title>Rain Radar Viewer</title>
         <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="app/js/ui-bootstrap-0.1.0.min.js"></script>
+        <script src="app/js/ui-bootstrap-tpls-0.1.0.js"></script>
         <script src="https://cdn.jsdelivr.net/underscorejs/1.5.2/underscore-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
         <script src="app/application.js"></script>
@@ -16,16 +17,21 @@
         <div class="container">
             <div class="page-header text-center">
                 <h1>Rain Radar Viewer</h1>
+            </div>
 
-                <div class="alerts-container">
-                    <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{alert.msg}}</alert>
-                </div>
-
-                <div class="radar-img-container" ng-repeat="img in images">
-                    <img class="img-rounded" ng-src="{{ img.url }}"/>
-                    <br/>
-                    <br/>
-                </div>
+            <div class="alerts-container">
+                <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{alert.msg}}</alert>
+            </div>
+            <div style="width: 434px; margin: auto;" class="text-center">
+                <carousel interval="-1">
+                    <slide ng-repeat="img in images" active="img.active">
+                        <img ng-src="{{ img.url}}" style="margin:auto;">
+                        <div class="carousel-caption">
+                            <h4></h4>
+                            <p>{{ img.time }}</p>
+                        </div>
+                    </slide>
+                </carousel>
             </div>
         </div>
     </body>
