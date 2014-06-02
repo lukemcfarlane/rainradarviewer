@@ -30,6 +30,9 @@ app.controller('MainCtrl', function($scope, $http) {
 				.tz('Pacific/Auckland')
 				.format('hh:mm a');
 		});
+		imagesArr = _.sortBy(imagesArr, 'datetime');
+
+		_.last(imagesArr).active = true;
 		$scope.images = imagesArr;
 	};
 });
