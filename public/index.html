@@ -7,6 +7,7 @@
         <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/underscorejs/1.5.2/underscore-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
         <script src="app/application.js"></script>
         <script src="app/controllers/mainCtrl.js"></script>
@@ -14,14 +15,17 @@
     <body ng-controller="MainCtrl">
         <div class="container">
             <div class="page-header text-center">
-              <h1>Rain Radar Viewer</h1>
+                <h1>Rain Radar Viewer</h1>
 
-              <div class="radar-img-container" ng-repeat="d in data">
-                  <img class="img-rounded" src="{{ d.url }}"/>
-                  <br/>
-                  <br/>
-              </div>
+                <div class="alerts-container">
+                    <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{alert.msg}}</alert>
+                </div>
 
+                <div class="radar-img-container" ng-repeat="img in images">
+                    <img class="img-rounded" src="{{ img.url }}"/>
+                    <br/>
+                    <br/>
+                </div>
             </div>
         </div>
     </body>
