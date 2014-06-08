@@ -18,19 +18,27 @@ end
 
 # This is the endpoint used by the AngularJS app to get the radar image data
 get '/radar/images' do
-    response = RestClient.get 'http://metservice.com/publicData/rainRadarChristchurch_2h_7min_300K'
-
-    dataArr = JSON.parse(response)
+    sinceStr = params[:since]
+    since = 0
 
     newDataArr = []
+    if sinceStr != nil
+        since = sinceStr.to_i
+    end
+
+    response = RestClient.get 'http://metservice.com/publicData/rainRadarChristchurch_2h_7min_300K'
+    dataArr = JSON.parse(response)
+
     dataArr.each do |d|
         dt = DateTime.parse(d['longDateTime'])
-        unixTime = dt.strftime('%s')
-        newData = {
-            datetime: unixTime,
-            url: BASE_URL + d['url']
-        }
-        newDataArr.push(newData)
+        unixTime = dt.strftime('%s').to_i
+        if unixTime >= since 
+            newData = {
+                datetime: unixTime,
+                url: BASE_URL + d['url']
+            }
+            newDataArr.push(newData);
+        end
     end
 
     newDataArr.to_json
