@@ -86,7 +86,10 @@ app.controller('MainCtrl', function($scope, $http, $interval) {
 		angular.forEach(imagesArr, function(img) {
 			img.id = _.uniqueId('img_');
 			img.active = false;
-			img.label = img.time;
+			img.label = moment
+				.unix(img.datetime)
+				.tz('Pacific/Auckland')
+				.format('hh:mm a');
 			img.retrievedAt = getCurrentTime();
 		});
 		imagesArr = _.sortBy(imagesArr, 'datetime');
