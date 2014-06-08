@@ -24,6 +24,12 @@
                 <h1>Rain Radar Viewer</h1>
             </div>
 
+            <div class="text-center">
+                <small ng-if="!isUpdating" ng-if="lastUpdatedStr">Last updated {{ lastUpdatedStr }} ago</small>
+                <small ng-if="isUpdating">Updating...</small>
+            </div>
+            <br/>
+
             <div class="alerts-container">
                 <alert ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">{{alert.msg}}</alert>
             </div   >
