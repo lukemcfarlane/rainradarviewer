@@ -76,6 +76,7 @@ app.controller('MainCtrl', function($scope, $http, $interval) {
 			$scope.lastUpdatedStr = moment.duration(lastUpdatedTime.diff(moment())).humanize();
 		}
 	};
+	$interval(updateLastUpdatedStr, 5 * 1000);
 
 	var getCurrentTime = function() {
 		return Math.round(new Date().getTime() / 1000);
