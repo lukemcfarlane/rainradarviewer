@@ -14,12 +14,16 @@
         <script src="app/js/moment-timezone.min.js"></script>
         <script src="app/application.js"></script>
         <script src="app/controllers/mainCtrl.js"></script>
-        <script src="app/directives/mgOverlay.js"></script>
+        <script src="app/directives/mouseLapse.js"></script>
+        <style type="text/css">
+            mouse-lapse {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+        </style>
     </head>
     <body ng-controller="MainCtrl">
-        <mg-overlay num-cols="{{ numImages }}"
-                    active-col="activeIndex">
-        </mg-overlay>
         <div class="container">
 
             <div class="page-header text-center">
@@ -28,11 +32,10 @@
 
             <div class="alerts-container">
                 <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{alert.msg}}</alert>
-            </div>
+            </div   >
 
-            <div class="text-center" ng-repeat="img in images" class="img-container">
-                <h4 ng-if="img.active">{{ img.time }}</h4>
-                <img ng-src="{{ img.url }}" ng-if="img.active"></img>
+            <div class="text-center">
+                <mouse-lapse images="images"></mouse-lapse>
             </div>
         </div>
     </body>
