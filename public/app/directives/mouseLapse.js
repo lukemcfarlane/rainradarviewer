@@ -127,6 +127,7 @@ app.directive('mouseLapse', function() {
 							break;
 						case 'touchmove':
 							pageX = event.originalEvent.touches[0].pageX;
+							event.preventDefault();
 							break;
 						default:
 							throw Error('mouse-lapse cannot support event: ' + eventName);
