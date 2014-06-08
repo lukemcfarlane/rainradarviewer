@@ -42,8 +42,8 @@ app.controller('MainCtrl', function($scope, $http, $interval) {
 			if (_.size(data) > 0) {
 				loadImages(data);
 				lastUpdatedTime = moment();
-				updateLastUpdatedStr();
 			}
+			updateLastUpdatedStr();
 			$scope.isUpdating = false;
 		}).error(function(data, status, headers, config) {
 			$scope.alerts.push({
