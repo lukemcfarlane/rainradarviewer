@@ -21,11 +21,14 @@ app.controller('MainCtrl', function($scope, $http) {
 
 	$http({
 		method: 'GET',
-		url: 'radar/images'
+		url: 'radar/images/'
 	}).success(function(data, status, headers, config) {
 		loadImages(data);
 	}).error(function(data, status, headers, config) {
-		$scope.alerts.push('Something went wrong while trying to retrieve rain radar images.');
+		$scope.alerts.push({
+			msg: 'Something went wrong while trying to retrieve rain radar images.',
+			type: 'danger'
+		});
 	});
 
 	$scope.closeAlert = function(index) {
