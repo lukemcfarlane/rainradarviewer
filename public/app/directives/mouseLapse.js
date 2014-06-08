@@ -17,7 +17,8 @@ app.directive('mouseLapse', function() {
 	};
 
 	var makeActive = function(index, arr) {
-		if (arr.length > 0) {
+		var newActiveEl = arr[index];
+		if (typeof newActiveEl !== 'undefined') {
 			for (var i = 0; i < arr.length; i++) {
 				arr[i].active = false;
 			}
@@ -98,6 +99,10 @@ app.directive('mouseLapse', function() {
 		return imgDataArr;
 	};
 
+	var getCol = function(pageX, windowWidth, numCols) {
+		return Math.floor((pageX / windowWidth) * numCols);
+	};
+
 	return {
 		restrict: 'E',
 		replace: true,
@@ -113,13 +118,32 @@ app.directive('mouseLapse', function() {
 				makeActive(0, $scope.imageDataArr);
 			});
 
-			$element.on('mousemove', function($e) {
+			var handleEvent = function(eventName, event) {
 				if (typeof $scope.imageDataArr !== 'undefined') {
-					var mouseX = $e.clientX;
-					var col = Math.floor((mouseX / windowWidth) * numCols);
+					var pageX;
+					switch (eventName) {
+						case 'mousemove':
+							pageX = event.clientX;
+							break;
+						case 'touchmove':
+							pageX = event.originalEvent.touches[0].pageX;
+							break;
+						default:
+							throw Error('mouse-lapse cannot support event: ' + eventName);
+					}
+
+					var col = Math.floor((pageX / windowWidth) * numCols);
 					makeActive(col, $scope.imageDataArr);
 					$scope.$apply();
 				}
+			};
+
+			var supportedEvents = ['mousemove', 'touchmove'];
+
+			_.each(supportedEvents, function(eventName) {
+				$element.on(eventName, function($e) {
+					handleEvent(eventName, $e);
+				});
 			});
 		},
 		template: '<div class="ml-container" >' +
